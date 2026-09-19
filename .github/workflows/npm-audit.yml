@@ -1,10 +1,8 @@
 name: npm-audit
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_call:
+    
 jobs:
   npm-audit:
     runs-on: ubuntu-latest

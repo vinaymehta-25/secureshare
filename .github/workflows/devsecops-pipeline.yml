@@ -1,0 +1,25 @@
+name: Devsecops pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]    
+
+jobs:
+    ci:
+        uses: ./.github/workflows/ci.yml
+
+    codeql:
+        uses: ./.github/workflows/codeql.yml
+    
+    npm-audit:
+        needs: [ci, codeql]
+        uses: ./.github/workflows/npm-audit.yml
+
+    pip-audit:
+        needs: [ci, codeql,npm-audit]
+        uses: ./.github/workflows/pip-audit.yml    
+    docker-build:
+        needs: [ci, codeql,npm-audit,pip-audit]
+        uses: ./.github/workflows/docker-build.yml    
