@@ -23,7 +23,7 @@ jobs:
           severity: CRITICAL,HIGH
 
       - name: Build frontend image
-        run: docker build -t secureshare-frontend:latest ./frontend
+        run: docker build --build-arg VITE_API_URL=http://43.204.221.84:8000 -t secureshare-frontend:latest ./frontend
 
       - name: Scan frontend image
         uses: aquasecurity/trivy-action@master
