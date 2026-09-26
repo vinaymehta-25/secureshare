@@ -28,3 +28,7 @@ jobs:
     docker-build:
         needs: [ci, codeql,npm-audit,pip-audit]
         uses: ./.github/workflows/docker-build.yml    
+    cd: 
+        needs: [docker-build]
+        uses: ./.github/workflows/cd.yml    
+        secrets: inherit
